@@ -1,4 +1,4 @@
-Django CKEditor 5 
+Django CKEditor 5 with MayhJax
 ==================
 
    CKEditor 5 for Django >= 2.0
