@@ -1,4 +1,4 @@
-Django CKEditor 5 with MayhJax
+Django CKEditor 5 with MathJax
 ==================
 
    CKEditor 5 for Django >= 2.0
@@ -8,7 +8,7 @@ Quick start
 
  .. code-block:: bash
  
-        pip install django-ckeditor-5
+        pip install git+https://github.com/fish-not-phish/django-ckeditor-5.git
 
 1. Add "django_ckeditor_5" to your INSTALLED_APPS in your `project/settings.py` like this:
 
@@ -399,27 +399,15 @@ You can restrict the maximum size for uploaded images and files by adding
 to your config. Default is 0 (allow any file size).
 
 
-Installing from GitHub:
-^^^^^^^^^^^^^^^^^^^^^^^
-  .. code-block:: bash
+Using MathJax:
+^^^^^^^^^^^^^^
+You need to add JavaScript to the HTML templates you wish to use the plugin on:
+HTML template for using MathJax (writing equations)
 
-    cd your_root_project
-    git clone https://github.com/hvlads/django-ckeditor-5.git
-    cd django-ckeditor-5
-    yarn install
-    yarn run prod
-    cd your_root_project
-    python manage.py collectstatic
-    
-Example Sharing content styles between front-end and back-end:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To apply ckeditor5 styling outside of the editor, download content.styles.css from the official ckeditor5 docs and include it as a styleshet within your HTML template. You will need to add the ck-content class to the container of your content for the styles to be applied.
-`<https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/content-styles.html#sharing-content-styles-between-frontend-and-backend>`_
+ .. code-block:: javascript
+        
 
-.. code-block:: html
 
-   <link rel="stylesheet" href="path/to/assets/content-styles.css" type="text/css">
-   ...
-   <div class="ck-content">
-   <p>ckeditor content</p>
-   </div>
+HTML template for viewing MathJax output (viewing equations)
+
+ .. code-block:: javascript
