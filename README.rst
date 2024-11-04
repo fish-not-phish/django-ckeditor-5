@@ -20,7 +20,7 @@ Quick start
         ]
 
 
-2. Also, in your `project/settings.py` add:
+2. Also, in your `project/settings.py` add (includes MathJax):
 
   .. code-block:: python
 
@@ -75,7 +75,14 @@ Quick start
             'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
                         'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
                         'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
-                        'insertTable',],
+                        'insertTable', 'math'],
+             "math": {
+                "engine": 'mathjax',
+                "outputType": 'span',
+                "forceOutputType": False,
+                "enablePreview": True,
+                "className": 'math-tex'
+            },
             'image': {
                 'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
                             'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
@@ -401,13 +408,36 @@ to your config. Default is 0 (allow any file size).
 
 Using MathJax:
 ^^^^^^^^^^^^^^
-You need to add JavaScript to the HTML templates you wish to use the plugin on:
-HTML template for using MathJax (writing equations)
 
- .. code-block:: javascript
-        
+You need to add JavaScript to the HTML templates you wish to use the plugin on:
+
+HTML template for using MathJax (writing equations)
+---------------------------------------------------
+
+.. code-block:: html
+
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+   <script>
+       MathJax.Ajax.config.path["mhchem"] = "https://cdnjs.cloudflare.com/ajax/libs/mathjax-mhchem/3.3.2";
+       MathJax.Hub.Config({                                                    
+           showMathMenu: false,
+           TeX: {                                                      
+               extensions: [ "[mhchem]/mhchem.js" ]                                              
+           }, 
+           messageStyle: "none",
+           tex2jax: {                                                      
+               preview: "none"                                          
+           }
+       });
+   </script>
 
 
 HTML template for viewing MathJax output (viewing equations)
+------------------------------------------------------------
 
- .. code-block:: javascript
+.. code-block:: html
+
+   <script>
+       const preview = document.getElementsByClassName('article-body')[0];
+       MathJax.Hub.Queue(["Typeset", MathJax.Hub, preview]); // MathJax 2
+   </script>
